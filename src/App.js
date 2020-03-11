@@ -9,8 +9,10 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
-        <Nav />
+        <div className="jumbotron">
+          <Header />
+          <Nav />
+        </div>
         <Routes />
       </BrowserRouter>
     </div>

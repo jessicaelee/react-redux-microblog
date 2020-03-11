@@ -1,8 +1,11 @@
 import React from 'react';
 import PostCard from './PostCard';
+import { useSelector } from 'react-redux';
 
 
-function Home({ posts }) {
+
+function Home() {
+    const posts = useSelector(st=>st);
 
     const postList = posts.map(post => <PostCard key={post.id} post={post} />);
 

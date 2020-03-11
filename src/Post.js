@@ -2,30 +2,28 @@ import React, { useState } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 import Form from './Form';
 import PostContent from './PostContent';
+import { editPost } from './action';
+import { useSelector } from 'react-redux';
 
-function Post({ posts, handlePost }) {
+function Post() {
+  const { postid } = useParams();
+  const post = useSelector(st => st.find(post => postid === post.id));
   const [isEditing, setIsEditing] = useState(false);
 
-  const toggleEditing = () => {
-    setIsEditing(old => !old);
-  }
+  const toggleEditing = () => setIsEditing(old => !old);
 
-  const { postid } = useParams();
-  const post = posts.find(
-    post => postid === post.id
-  );
-
-  if(!post){
-    return <Redirect to="/"/>
+  if (!post) {
+    return <Redirect to="/" />
   }
 
   return (
     <div>
       {
         isEditing ?
-          <Form postContent={post} handlePost={handlePost}>
+          <Form postContent={post} makeAction={editPost}>
             <button type="button" onClick={toggleEditing}>Cancel</button>
-          </Form> :
+          </Form>
+          :
           <PostContent post={post} toggleEditing={toggleEditing} />
       }
     </div>

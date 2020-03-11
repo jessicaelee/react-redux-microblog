@@ -3,10 +3,14 @@ import { NavLink } from 'react-router-dom';
 
 function Nav() {
   return (
-    <div className="nav">
-      <NavLink exact to="/">Blogs</NavLink>
-      <NavLink exact to="/new">Add a new post</NavLink>
-    </div>
+    <ul className="nav justify-content-center">
+      <li className="nav-item">
+        <NavLink className="nav-link" exact to="/">Blogs</NavLink>
+      </li>
+      <li className="nav-item">
+        <NavLink className="nav-link" exact to="/new">Add a new post</NavLink>
+      </li>
+    </ul>
   )
 };
 

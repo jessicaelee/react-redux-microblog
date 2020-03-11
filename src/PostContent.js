@@ -1,8 +1,9 @@
 import React from 'react';
 import Comment from './Comment';
+import CommentForm from './CommentForm';
 
 function PostContent({ post, toggleEditing }) {
-    const { title, description, body, comments } = post;
+    const { title, description, body, comments, id } = post;
     return (
         <div>
             <h4>{title}</h4>
@@ -11,8 +12,9 @@ function PostContent({ post, toggleEditing }) {
             <button onClick={toggleEditing}>Edit</button>
             <hr/>
             <h4>Comments</h4>
+            <CommentForm postid={id}/>
             {comments.map(comment =>
-                <Comment key={comment.id} comment={comment.message} />
+                <Comment key={comment.id} comment={comment} />
             )}
         </div>
     )

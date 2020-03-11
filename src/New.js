@@ -1,12 +1,14 @@
 import React from 'react';
 import Form from './Form'
 import { Link } from 'react-router-dom';
+import { addPost } from "./action";
 
-function New({ handlePost }) {
+function New() {
+
     return (
         <div>
             <h2>New Post</h2>
-            <Form handlePost={handlePost}>
+            <Form makeAction={addPost}>
                 <Link to="/">
                     <button type="button">Cancel</button>
                 </Link>
