@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './Home';
 import New from './New';
-import PostContent from './PostContent';
+import Post from './Post';
 
 
 function Routes() {
@@ -12,11 +12,23 @@ function Routes() {
     setPosts(oldPosts => [...oldPosts, newPost])
   }
 
+  const editPost = (editedPost) => {
+    setPosts(oldPosts => 
+      oldPosts.map(post=>{
+        if(post.id === editedPost.id){
+          return editedPost;
+        } else {
+          return post;
+        }
+      })
+    )
+  }
+
   return (
     <Switch>
       <Route exact path="/"> <Home posts={posts} /> </Route>
       <Route exact path="/new"> <New handlePost={addPost} /> </Route>
-      <Route exact path="/:postid"> <PostContent /> </Route>
+      <Route exact path="/:postid"> <Post posts={posts} handlePost={editPost}/> </Route>
       <Redirect to="/" />
     </Switch>
   );

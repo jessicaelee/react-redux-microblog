@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { v4 as uuid } from 'uuid'
 
-function Form({ postContent, handlePost }) {
-    const INITIAL_STATE = postContent ? postContent : { title: "", description: "", body: "" };
+function Form({ postContent, handlePost, children, }) {
+    const {id, ...rest} = postContent || { title: "", description: "", body: "" };
+    const INITIAL_STATE = rest;
     const [formData, setFormData] = useState(INITIAL_STATE);
     const history = useHistory();
-    const { postid } = useParams();
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -25,7 +25,7 @@ function Form({ postContent, handlePost }) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
-        const postData = postid ? { ...formData, id: postid } : { ...formData, id: uuid() }
+        const postData = id ? { ...formData, id } : { ...formData, id: uuid() }
 
         handlePost(postData)
         history.push('/');
@@ -36,7 +36,7 @@ function Form({ postContent, handlePost }) {
             <form onSubmit={handleSubmit}>
                 {formInputs}
                 <button type="submit">Save</button>
-                <button >Cancel</button>
+                {children}
             </form>
         </div>
     );
