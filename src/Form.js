@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { v4 as uuid } from 'uuid'
 
 function Form({ postContent, handlePost, children, }) {
-    const {id, ...rest} = postContent || { title: "", description: "", body: "" };
+    const {id, comments, ...rest} = postContent || { title: "", description: "", body: "" };
     const INITIAL_STATE = rest;
     const [formData, setFormData] = useState(INITIAL_STATE);
     const history = useHistory();
@@ -25,7 +25,7 @@ function Form({ postContent, handlePost, children, }) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
-        const postData = id ? { ...formData, id } : { ...formData, id: uuid() }
+        const postData = id ? { ...formData, comments, id } : { ...formData, comments: [], id: uuid() }
 
         handlePost(postData)
         history.push('/');
