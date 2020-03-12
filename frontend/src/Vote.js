@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import './Vote.css'
+import { voteToAPI } from './action'
 
-function Vote({ postContent, makeAction, toggleEditing }) {
+function Vote({ postid }) {
+  const dispatch = useDispatch();
 
+  const voteUp = () => {
+    dispatch(voteToAPI(postid, "up"));
+  }
 
+  const voteDown = () => {
+    dispatch(voteToAPI(postid, "down"));
+  }
 
   return (
     <div>

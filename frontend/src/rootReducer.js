@@ -1,6 +1,6 @@
-import { ADD_COMMENT, DELETE_COMMENT, ADD_POST, EDIT_POST, SET_POSTS, SHOW_ERROR } from "./actionTypes";
+import { ADD_COMMENT, DELETE_COMMENT, ADD_POST, EDIT_POST, SET_POSTS, UPDATE_VOTES } from "./actionTypes";
 
-const INITIAL_STATE = { posts: [] }
+const INITIAL_STATE = { loading: true, posts: [] }
 
 function rootReducer(state = INITIAL_STATE, action) {
   let updatedPosts;
@@ -37,9 +37,15 @@ function rootReducer(state = INITIAL_STATE, action) {
         }
       });
       return { posts: updatedPosts };
-    case SHOW_ERROR:
-      //TODO!
-      return state.posts;
+    case UPDATE_VOTES:
+      updatedPosts = state.posts.map(post => {
+        if (post.id === action.payload.postid) {
+          return { ...post, votes: action.payload.votes };
+        } else {
+          return post;
+        }
+      });
+      return { posts: updatedPosts }
     default:
       console.warn("Unexpected action type:", action.type);
       return state;
