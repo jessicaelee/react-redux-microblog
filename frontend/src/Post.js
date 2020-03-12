@@ -8,13 +8,14 @@ import { useSelector } from 'react-redux';
 function Post() {
   const { postid } = useParams();
   const post = useSelector(st => st.find(post => postid === post.id.toString()));
+  const isLoading = useSelector(st => st === null);
 
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEditing = () => setIsEditing(old => !old);
 
   if (!post) {
-    return <div style={{fontSize:"100px"}}>This post doesn't exist</div>
+    return <div>This post doesn't exist</div>
   }
 
   return (

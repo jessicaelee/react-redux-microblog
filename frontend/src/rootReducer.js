@@ -1,6 +1,6 @@
 import { ADD_COMMENT, DELETE_COMMENT, ADD_POST, EDIT_POST, SET_POSTS, SHOW_ERROR } from "./actionTypes";
 
-const INITIAL_STATE = []
+const INITIAL_STATE = null
 
 // const INITIAL_STATE = [
 //   {
@@ -50,6 +50,7 @@ function rootReducer(state = INITIAL_STATE, action) {
         }
       });
     case SHOW_ERROR:
+      //TODO!
       return state;
     default:
       console.warn("Unexpected action type:", action.type);

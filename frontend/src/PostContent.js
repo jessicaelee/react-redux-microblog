@@ -3,7 +3,7 @@ import Comment from './Comment';
 import CommentForm from './CommentForm';
 import { useDispatch } from 'react-redux';
 import { getOnePostFromAPI } from './action';
-import './PostContent.css'
+import './PostContent.css';
 
 function PostContent({ post, toggleEditing }) {
   let { title, description, body, comments, id } = post;
@@ -25,7 +25,7 @@ function PostContent({ post, toggleEditing }) {
       </div>
       <hr />
       {!comments ? "Loading..."
-        : <div className="comment-container"> <h4>{comments.length || 0} Comments</h4>
+        : <div className="comment-container"> <h4>{comments.length || 0} Comment{comments.length === 1 ? "" : "s"}</h4>
           <CommentForm postid={id} />
           <div className="comment-container">
             {comments.map(comment =>
