@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
-import { v4 as uuid } from 'uuid';
 import { useDispatch } from 'react-redux'
+import { addCommentToAPI } from './action';
 
 function CommentForm({ postid }) {
-    const INITIAL_STATE = { text: "" };
+    const INITIAL_STATE = "";
     const [comment, setComment] = useState(INITIAL_STATE);
     const dispatch = useDispatch();
 
     const handleChange = (evt) => {
         const { value } = evt.target;
-        setComment({ text: value });
+        setComment(value);
     };
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        const newComment = { ...comment, id: uuid(), postid };
-        dispatch({ type: "ADD_COMMENT", payload: newComment });
+        dispatch(addCommentToAPI(postid, comment));
         setComment(INITIAL_STATE);
     }
 
     return (
         <form className="form-group" onSubmit={handleSubmit}>
             <label htmlFor="comment">Leave a comment...</label>
-            <input rows="2" className="form-control" id="comment" name="comment" value={comment.text} onChange={handleChange} />
+            <input rows="2" className="form-control" id="comment" name="comment" value={comment} onChange={handleChange} />
             <button className="btn btn-primary btn-sm">Add comment</button>
         </form>
     );

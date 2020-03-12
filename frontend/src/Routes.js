@@ -3,21 +3,16 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './Home';
 import New from './New';
 import Post from './Post';
-import MicroblogAPI from './MircroblogAPI';
 import { useDispatch } from 'react-redux';
-import { setPosts } from './action';
+import { getPostsFromAPI } from './action';
 
 
 function Routes() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function getAll() {
-      let res = await MicroblogAPI.getAllPosts();
-      dispatch(setPosts(res))
-    }
-    getAll();
-  }, [])
+    dispatch(getPostsFromAPI())
+  }, [dispatch])
 
   return (
     <Switch>

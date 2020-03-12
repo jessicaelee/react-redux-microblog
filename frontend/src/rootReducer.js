@@ -1,4 +1,4 @@
-import { ADD_COMMENT, DELETE_COMMENT, ADD_POST, EDIT_POST, SET_POSTS } from "./actionTypes";
+import { ADD_COMMENT, DELETE_COMMENT, ADD_POST, EDIT_POST, SET_POSTS, SHOW_ERROR } from "./actionTypes";
 
 const INITIAL_STATE = []
 
@@ -44,11 +44,13 @@ function rootReducer(state = INITIAL_STATE, action) {
     case EDIT_POST:
       return state.map(post => {
         if (post.id === action.payload.id) {
-          return action.payload;
+          return {...action.payload, comments:action.payload.comments};
         } else {
           return post;
         }
       });
+    case SHOW_ERROR:
+      return state;
     default:
       console.warn("Unexpected action type:", action.type);
       return state;

@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { v4 as uuid } from 'uuid'
 import { useDispatch } from 'react-redux';
 import './Form.css'
 
-function Form({ postContent, makeAction, children, }) {
+function Form({ postContent, makeAction, toggleEditing }) {
     const { id, comments, votes, ...rest } = postContent || { title: "", description: "", body: "" };
     const INITIAL_STATE = rest;
     const [formData, setFormData] = useState(INITIAL_STATE);
-    const history = useHistory();
     const dispatch = useDispatch();
-
-    console.log({ INITIAL_STATE })
-    console.log({ formData })
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -25,10 +19,9 @@ function Form({ postContent, makeAction, children, }) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
-        const postData = id ? { ...formData, comments, id } : { ...formData, comments: [], id: uuid() };
-
-        dispatch(makeAction(postData));
-        history.push('/');
+        dispatch(makeAction(formData, id, comments));
+        //TODO: FIX HISTORY LOCATION
+        toggleEditing();
     };
 
     const formInputs = Object.keys(formData).map(name => (
@@ -43,7 +36,7 @@ function Form({ postContent, makeAction, children, }) {
             <form onSubmit={handleSubmit}>
                 {formInputs}
                 <button className="btn btn-primary" type="submit">Save</button>
-                {children}
+                <button className="btn btn-secondary" type="button" onClick={toggleEditing}>Cancel</button>
             </form>
         </div>
     );

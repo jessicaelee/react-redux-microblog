@@ -3,3 +3,4 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
 export const SET_POSTS = "SET_POSTS";
+export const SHOW_ERROR = "SHOW_ERROR";
