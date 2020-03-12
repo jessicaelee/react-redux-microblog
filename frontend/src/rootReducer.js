@@ -2,13 +2,15 @@ import { ADD_COMMENT, DELETE_COMMENT, ADD_POST, EDIT_POST, SET_POSTS, UPDATE_VOT
 
 const INITIAL_STATE = { loading: true, posts: [] }
 
+const sortPosts = posts => {
+  return posts.sort((a, b) => b.votes - a.votes)
+}
+
 function rootReducer(state = INITIAL_STATE, action) {
   let updatedPosts;
-  let sortedList
   switch (action.type) {
     case SET_POSTS:
-      sortedList = action.payload.sort((a, b) => b.votes - a.votes);
-      return { posts: action.payload }
+      return { posts: sortPosts(action.payload) }
     case ADD_COMMENT:
       updatedPosts = state.posts.map(post => {
         if (post.id === action.payload.postid) {
@@ -29,7 +31,7 @@ function rootReducer(state = INITIAL_STATE, action) {
       });
       return { posts: updatedPosts }
     case ADD_POST:
-      return { posts: [...state.posts, action.payload] };
+      return { posts: sortPosts([...state.posts, action.payload]) };
     case EDIT_POST:
       updatedPosts = state.posts.map(post => {
         if (post.id === action.payload.id) {
@@ -49,8 +51,7 @@ function rootReducer(state = INITIAL_STATE, action) {
       });
       return { posts: updatedPosts }
     case SORT_POSTS:
-      sortedList = action.payload.sort((a, b) => b.votes - a.votes);
-      return { posts: sortedList };
+      return { posts: sortPosts(action.payload) };
     default:
       console.warn("Unexpected action type:", action.type);
       return state;
