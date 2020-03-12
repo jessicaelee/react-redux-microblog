@@ -10,7 +10,8 @@ function rootReducer(state = INITIAL_STATE, action) {
   let updatedPosts;
   switch (action.type) {
     case SET_POSTS:
-      return { posts: sortPosts(action.payload) }
+      return { ...state, loading: false, posts: sortPosts(action.payload) }
+
     case ADD_COMMENT:
       updatedPosts = state.posts.map(post => {
         if (post.id === action.payload.postid) {
@@ -19,7 +20,8 @@ function rootReducer(state = INITIAL_STATE, action) {
           return post;
         }
       });
-      return { posts: updatedPosts }
+      return { ...state, posts: updatedPosts }
+
     case DELETE_COMMENT:
       updatedPosts = state.posts.map(post => {
         if (post.id === action.payload.postid) {
@@ -29,9 +31,11 @@ function rootReducer(state = INITIAL_STATE, action) {
           return post;
         };
       });
-      return { posts: updatedPosts }
+      return { ...state, posts: updatedPosts }
+
     case ADD_POST:
-      return { posts: sortPosts([...state.posts, action.payload]) };
+      return { ...state, posts: sortPosts([...state.posts, action.payload]) };
+
     case EDIT_POST:
       updatedPosts = state.posts.map(post => {
         if (post.id === action.payload.id) {
@@ -40,7 +44,8 @@ function rootReducer(state = INITIAL_STATE, action) {
           return post;
         }
       });
-      return { posts: updatedPosts };
+      return { ...state, posts: updatedPosts };
+
     case UPDATE_VOTES:
       updatedPosts = state.posts.map(post => {
         if (post.id === action.payload.postid) {
@@ -49,9 +54,11 @@ function rootReducer(state = INITIAL_STATE, action) {
           return post;
         }
       });
-      return { posts: updatedPosts }
+      return { ...state, posts: updatedPosts };
+
     case SORT_POSTS:
-      return { posts: sortPosts(action.payload) };
+      return { ...state, posts: sortPosts(action.payload) };
+
     default:
       console.warn("Unexpected action type:", action.type);
       return state;
