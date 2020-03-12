@@ -1,4 +1,4 @@
-import { ADD_COMMENT, DELETE_COMMENT, ADD_POST, EDIT_POST, SET_POSTS, UPDATE_VOTES } from "./actionTypes";
+import { ADD_COMMENT, DELETE_COMMENT, ADD_POST, EDIT_POST, SET_POSTS, UPDATE_VOTES, SORT_POSTS } from "./actionTypes";
 import axios from "axios";
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000/api";
 
@@ -65,6 +65,13 @@ export function voteToAPI(postid, direction) {
   return async function (dispatch) {
     const { votes } = await request(dispatch, `posts/${postid}/vote/${direction}`, {}, "post");
     dispatch(updateVotes(postid, votes))
+  }
+}
+
+export function sortPosts(posts) {
+  return {
+    type: SORT_POSTS,
+    payload: posts
   }
 }
 

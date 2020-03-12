@@ -5,6 +5,7 @@ width: 700px;
 
 .card-title {
   padding: 10px;
+  display: inline;
 }
 
 .card-body {
@@ -16,3 +17,4 @@ width: 700px;
   color: orange;
   text-decoration: none;
 }
+

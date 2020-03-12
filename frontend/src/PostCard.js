@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './PostCard.css'
-import Vote from './Vote'
+import Vote from './Votes'
 
 function PostCard({ post }) {
   const { title, description, id, votes } = post;

@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PostCard from './PostCard';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import './Home.css'
+import { sortPosts } from './action'
 
 
 function Home() {
+    const dispatch = useDispatch();
     const posts = useSelector(st => st.posts);
+
+    useEffect(() => {
+        dispatch(sortPosts([...posts]))
+    }, []);
 
     const postList = posts.map(post => <PostCard key={post.id} post={post} />);
 
