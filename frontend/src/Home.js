@@ -5,7 +5,7 @@ import './Home.css'
 
 
 function Home() {
-    const posts = useSelector(st => st);
+    const posts = useSelector(st => st.posts);
 
     const postList = posts.map(post => <PostCard key={post.id} post={post} />);
 

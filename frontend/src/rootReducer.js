@@ -1,57 +1,45 @@
 import { ADD_COMMENT, DELETE_COMMENT, ADD_POST, EDIT_POST, SET_POSTS, SHOW_ERROR } from "./actionTypes";
 
-const INITIAL_STATE = null
-
-// const INITIAL_STATE = [
-//   {
-//     title: "blah test",
-//     description: "blah description",
-//     body: "blahdy",
-//     id: "idkthisisapostid",
-//     comments: [
-//       {
-//         message: "HI!",
-//         id: "asldfhklj",
-//         postid: "idkthisisapostid"
-//       }
-//     ]
-//   }
-// ]
+const INITIAL_STATE = { posts: [] }
 
 function rootReducer(state = INITIAL_STATE, action) {
+  let updatedPosts;
   switch (action.type) {
     case SET_POSTS:
-      return action.payload;
+      return { posts: action.payload }
     case ADD_COMMENT:
-      return state.map(post => {
+      updatedPosts = state.posts.map(post => {
         if (post.id === action.payload.postid) {
           return { ...post, comments: [...post.comments, action.payload] };
         } else {
           return post;
         }
       });
+      return { posts: updatedPosts }
     case DELETE_COMMENT:
-      return state.map(post => {
+      updatedPosts = state.posts.map(post => {
         if (post.id === action.payload.postid) {
           const newComments = post.comments.filter(comment => comment.id !== action.payload.id);
           return { ...post, comments: newComments };
         } else {
           return post;
-        }
-      })
+        };
+      });
+      return { posts: updatedPosts }
     case ADD_POST:
-      return [...state, action.payload];
+      return { posts: [...state.posts, action.payload] };
     case EDIT_POST:
-      return state.map(post => {
+      updatedPosts = state.posts.map(post => {
         if (post.id === action.payload.id) {
-          return {...action.payload, comments:action.payload.comments};
+          return { ...action.payload, comments: action.payload.comments };
         } else {
           return post;
         }
       });
+      return { posts: updatedPosts };
     case SHOW_ERROR:
       //TODO!
-      return state;
+      return state.posts;
     default:
       console.warn("Unexpected action type:", action.type);
       return state;

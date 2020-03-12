@@ -7,8 +7,8 @@ import { useSelector } from 'react-redux';
 
 function Post() {
   const { postid } = useParams();
-  const post = useSelector(st => st.find(post => postid === post.id.toString()));
-  const isLoading = useSelector(st => st === null);
+  const post = useSelector(st => st.posts.find(post => postid === post.id.toString()));
+  // const isLoading = useSelector(st => st === null);
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -22,7 +22,7 @@ function Post() {
     <div>
       {
         isEditing ?
-          <Form postContent={post} makeAction={updatePostInAPI} toggleEditing={toggleEditing}/>
+          <Form postContent={post} makeAction={updatePostInAPI} toggleEditing={toggleEditing} />
           :
           <PostContent post={post} toggleEditing={toggleEditing} />
       }
