@@ -1,6 +1,7 @@
 import React from 'react';
 import { deleteComment } from './action';
 import { useDispatch } from 'react-redux';
+import './Comment.css'
 
 
 function Comment({ comment }) {
@@ -8,9 +9,12 @@ function Comment({ comment }) {
   const handleDelete = () => dispatch(deleteComment(comment));
 
   return (
-    <div>
-      <span>{comment.message}</span>
-      <button onClick={handleDelete}>X</button>
+    <div className="comment">
+      <span>{comment.text}</span>
+      <button className="delete-button" onClick={handleDelete}>
+        <i class="far fa-trash-alt"></i>
+      </button>
+
     </div>
   );
 }

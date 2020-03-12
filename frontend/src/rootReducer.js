@@ -1,25 +1,27 @@
-import { ADD_COMMENT, DELETE_COMMENT, ADD_POST, EDIT_POST } from "./actionTypes";
+import { ADD_COMMENT, DELETE_COMMENT, ADD_POST, EDIT_POST, SET_POSTS } from "./actionTypes";
 
-// const INITIAL_STATE = []
+const INITIAL_STATE = []
 
-const INITIAL_STATE = [
-  {
-    title:"blah test",
-    description:"blah description",
-    body:"blahdy",
-    id:"idkthisisapostid",
-    comments:[
-      {
-        message:"HI!",
-        id:"asldfhklj",
-        postid:"idkthisisapostid"
-      }
-    ]
-  }
-]
+// const INITIAL_STATE = [
+//   {
+//     title: "blah test",
+//     description: "blah description",
+//     body: "blahdy",
+//     id: "idkthisisapostid",
+//     comments: [
+//       {
+//         message: "HI!",
+//         id: "asldfhklj",
+//         postid: "idkthisisapostid"
+//       }
+//     ]
+//   }
+// ]
 
 function rootReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case SET_POSTS:
+      return action.payload;
     case ADD_COMMENT:
       return state.map(post => {
         if (post.id === action.payload.postid) {

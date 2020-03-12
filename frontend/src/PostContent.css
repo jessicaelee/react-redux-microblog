@@ -1,0 +1,14 @@
+.post-content{
+  width: 600px;
+  margin: auto;
+  text-align: left;
+}
+
+.post {
+  margin-bottom: 50px;
+}
+
+.comment-container {
+  margin-top: 35px;
+  text-align: left;
+}

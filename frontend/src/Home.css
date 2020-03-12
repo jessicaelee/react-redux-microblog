@@ -1,0 +1,13 @@
+.container {
+  justify-content: center;
+  width: 400px;
+  display: block;
+  margin: auto;
+}
+
+.home {
+  width: 600px;
+  justify-content: center;
+  margin: auto;
+  padding: 20px 0px;
+}

@@ -11,6 +11,9 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+  .jumbotron {
+    padding: 0px;
+  }
 }
 
 .App-header {
@@ -36,3 +39,4 @@
     transform: rotate(360deg);
   }
 }
+

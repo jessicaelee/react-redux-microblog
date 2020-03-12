@@ -1,0 +1,13 @@
+.form {
+  width: 600px;
+  margin: auto;
+}
+
+.form-control {
+  margin-bottom: 5px;
+}
+
+.btn {
+  margin-left: 5px;
+  margin-top: 10px;
+}
