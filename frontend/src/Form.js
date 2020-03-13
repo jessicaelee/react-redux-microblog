@@ -24,12 +24,19 @@ function Form({ postContent, makeAction, toggleEditing }) {
         toggleEditing();
     };
 
-    const formInputs = Object.keys(formData).map(name => (
-        <div key={name}>
-            <label htmlFor={name}>{name}: </label>
-            <input id={name} name={name} onChange={handleChange} value={formData[name]} className="form-control" required />
-        </div>
-    ));
+    const formInputs = Object.keys(formData).map(name => {
+        if (name === "body") {
+            return (<div key={name}>
+                <label htmlFor={name}>{name}: </label>
+                <textarea id={name} name={name} onChange={handleChange} value={formData[name]} className="form-control" rows="10" required />
+            </div>)
+        } else {
+            return (<div key={name}>
+                <label htmlFor={name}>{name}: </label>
+                <input id={name} name={name} onChange={handleChange} value={formData[name]} className="form-control" required />
+            </div>)
+        }
+    });
 
     return (
         <div className="form form-group">

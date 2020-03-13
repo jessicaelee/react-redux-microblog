@@ -88,24 +88,28 @@ function addComment(res, postid) {
     payload: { ...res, postid }
   }
 }
+
 function deleteComment(postid, id) {
   return {
     type: DELETE_COMMENT,
     payload: { postid, id }
   }
 }
+
 function addPost(res) {
   return {
     type: ADD_POST,
     payload: { ...res, comments: [] }
   }
 }
+
 function editPost(res, comments) {
   return {
     type: EDIT_POST,
     payload: { comments, ...res }
   }
 }
+
 function setPosts(res) {
   return {
     type: SET_POSTS,
